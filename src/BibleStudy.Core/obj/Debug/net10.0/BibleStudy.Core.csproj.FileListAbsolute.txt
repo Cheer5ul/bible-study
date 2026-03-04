@@ -1,0 +1,12 @@
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Core\bin\Debug\net10.0\BibleStudy.Core.deps.json
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Core\bin\Debug\net10.0\BibleStudy.Core.dll
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Core\bin\Debug\net10.0\BibleStudy.Core.pdb
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Core\obj\Debug\net10.0\BibleStudy.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Core\obj\Debug\net10.0\BibleStudy.Core.AssemblyInfoInputs.cache
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Core\obj\Debug\net10.0\BibleStudy.Core.AssemblyInfo.cs
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Core\obj\Debug\net10.0\BibleStudy.Core.csproj.CoreCompileInputs.cache
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Core\obj\Debug\net10.0\BibleStudy.Core.sourcelink.json
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Core\obj\Debug\net10.0\BibleStudy.Core.dll
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Core\obj\Debug\net10.0\refint\BibleStudy.Core.dll
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Core\obj\Debug\net10.0\BibleStudy.Core.pdb
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Core\obj\Debug\net10.0\ref\BibleStudy.Core.dll

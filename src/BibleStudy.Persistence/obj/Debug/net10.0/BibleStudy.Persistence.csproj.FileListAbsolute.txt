@@ -1,0 +1,16 @@
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\bin\Debug\net10.0\BibleStudy.Persistence.deps.json
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\bin\Debug\net10.0\BibleStudy.Persistence.dll
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\bin\Debug\net10.0\BibleStudy.Persistence.pdb
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\bin\Debug\net10.0\BibleStudy.Core.dll
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\bin\Debug\net10.0\BibleStudy.Core.pdb
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\obj\Debug\net10.0\BibleStudy.Persistence.csproj.AssemblyReference.cache
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\obj\Debug\net10.0\BibleStudy.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\obj\Debug\net10.0\BibleStudy.Persistence.AssemblyInfoInputs.cache
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\obj\Debug\net10.0\BibleStudy.Persistence.AssemblyInfo.cs
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\obj\Debug\net10.0\BibleStudy.Persistence.csproj.CoreCompileInputs.cache
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\obj\Debug\net10.0\BibleStudy.Persistence.sourcelink.json
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\obj\Debug\net10.0\BibleStu.F6F23009.Up2Date
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\obj\Debug\net10.0\BibleStudy.Persistence.dll
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\obj\Debug\net10.0\refint\BibleStudy.Persistence.dll
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\obj\Debug\net10.0\BibleStudy.Persistence.pdb
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.Persistence\obj\Debug\net10.0\ref\BibleStudy.Persistence.dll
