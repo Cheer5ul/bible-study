@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "BibleStudy.Application/1.0.0": {
+        "dependencies": {
+          "BibleStudy.Core": "1.0.0"
+        },
+        "runtime": {
+          "BibleStudy.Application.dll": {}
+        }
+      },
+      "BibleStudy.Core/1.0.0": {
+        "runtime": {
+          "BibleStudy.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BibleStudy.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BibleStudy.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
