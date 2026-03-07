@@ -17,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\BibleStudy.Application\BibleStudy.Application.csproj" />
       <ProjectReference Include="..\..\BibleStudy.Persistence\BibleStudy.Persistence.csproj" />
     </ItemGroup>
 

@@ -1,20 +1,22 @@
 ﻿using BibleStudy.Core.Interfaces;
+using BibleStudy.Core.Interfaces.Repositories;
 using BibleStudy.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BibleStudy.Persistence.Repositories;
 
 
-public class VersesRepository : IVersesRepository
+public class VerseRepository : IVerseRepository
 {
     private readonly BibleStudyDbContext _context;
 
-    public VersesRepository(BibleStudyDbContext context)
+    public VerseRepository(BibleStudyDbContext context)
     {
         _context = context;
     }
 
-    public async Task<string> GetVerseTextAsync(string translationAbbrev, string book, int chapter, int verseNumber)
+    public async Task<string> GetVerseTextAsync(string translationAbbrev, string book, int chapter, int verseNumber,
+        CancellationToken cancellationToken = default)
     {
         var bookId = await _context.Books
             .AsNoTracking()

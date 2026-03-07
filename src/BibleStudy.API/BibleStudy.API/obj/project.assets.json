@@ -931,6 +931,19 @@
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
       },
+      "BibleStudy.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "BibleStudy.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BibleStudy.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BibleStudy.Application.dll": {}
+        }
+      },
       "BibleStudy.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
@@ -3203,6 +3216,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "BibleStudy.Application/1.0.0": {
+      "type": "project",
+      "path": "../../BibleStudy.Application/BibleStudy.Application.csproj",
+      "msbuildProject": "../../BibleStudy.Application/BibleStudy.Application.csproj"
+    },
     "BibleStudy.Core/1.0.0": {
       "type": "project",
       "path": "../../BibleStudy.Core/BibleStudy.Core.csproj",
@@ -3216,6 +3234,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "BibleStudy.Application >= 1.0.0",
       "BibleStudy.Persistence >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 10.0.3",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 10.0.0",
@@ -3254,6 +3273,9 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
+            "D:\\RiderProjects\\BibleStudyPlatform\\src\\BibleStudy.Application\\BibleStudy.Application.csproj": {
+              "projectPath": "D:\\RiderProjects\\BibleStudyPlatform\\src\\BibleStudy.Application\\BibleStudy.Application.csproj"
+            },
             "D:\\RiderProjects\\BibleStudyPlatform\\src\\BibleStudy.Persistence\\BibleStudy.Persistence.csproj": {
               "projectPath": "D:\\RiderProjects\\BibleStudyPlatform\\src\\BibleStudy.Persistence\\BibleStudy.Persistence.csproj"
             }

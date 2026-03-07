@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\BibleStudy.Core\BibleStudy.Core.csproj" />
+    </ItemGroup>
+
 </Project>
