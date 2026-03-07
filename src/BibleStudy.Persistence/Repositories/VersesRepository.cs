@@ -1,12 +1,9 @@
-﻿using BibleStudy.Core.Models;
+﻿using BibleStudy.Core.Interfaces;
+using BibleStudy.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BibleStudy.Persistence.Repositories;
 
-public interface IVersesRepository
-{
-    Task<string> GetVerseTextAsync(string translationAbbrev, string book, int chapter, int verseNumber);
-}
 
 public class VersesRepository : IVersesRepository
 {

@@ -1,4 +1,6 @@
+using BibleStudy.Core.Interfaces;
 using BibleStudy.Persistence;
+using BibleStudy.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,8 @@ builder.Services.AddDbContext<BibleStudyDbContext>(options =>
 {
     options.UseNpgsql(configuration.GetConnectionString(nameof(BibleStudyDbContext)));
 });
+
+builder.Services.AddScoped<IVersesRepository, VersesRepository>();
 
 var app = builder.Build();
 
