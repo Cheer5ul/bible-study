@@ -1,6 +1,14 @@
-﻿namespace BibleStudy.Persistence.Repositories;
+﻿using BibleStudy.Core.Models;
+using Microsoft.EntityFrameworkCore;
 
-public class VersesRepository
+namespace BibleStudy.Persistence.Repositories;
+
+public interface IVersesRepository
+{
+    Task<string> GetVerseTextAsync(string translationAbbrev, string book, int chapter, int verseNumber);
+}
+
+public class VersesRepository : IVersesRepository
 {
     private readonly BibleStudyDbContext _context;
 
@@ -8,6 +16,23 @@ public class VersesRepository
     {
         _context = context;
     }
-    
-    
+
+    public async Task<string> GetVerseTextAsync(string translationAbbrev, string book, int chapter, int verseNumber)
+    {
+        var bookId = await _context.Books
+            .AsNoTracking()
+            .Where(b => b.Name == book)
+            .Select(b => b.Id)
+            .FirstOrDefaultAsync();
+
+        var result = await _context.Verses
+            .AsNoTracking()
+            .Where(v => v.BookId == bookId &&
+                        v.Chapter == chapter &&
+                        v.VerseNumber == verseNumber)
+            .Select(v => v.Text)
+            .FirstOrDefaultAsync();
+
+        return result;
+    }
 }
