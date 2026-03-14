@@ -14,7 +14,7 @@ public class TranslationConfiguration : IEntityTypeConfiguration<Translation>
             .IsRequired()
             .HasMaxLength(255);
         
-        builder.Property(x => x.Licence)
+        builder.Property(x => x.License)
             .HasMaxLength(500);
     }
 }

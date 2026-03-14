@@ -15,7 +15,7 @@ public class VerseRepository : IVerseRepository
         _context = context;
     }
 
-    public async Task<VerseDto> GetVerseWithoutVerseIdAsync(string translationAbbrev, string book, int chapter, int verseNumber,
+    public async Task<VerseDto> GetVerseDtoAsync(string translationAbbrev, string book, int chapter, int verseNumber,
         CancellationToken cancellationToken = default)
     {
 
