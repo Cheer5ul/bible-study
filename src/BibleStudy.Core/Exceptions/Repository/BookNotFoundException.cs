@@ -1,4 +1,4 @@
-﻿namespace BibleStudy.Persistence.Exceptions;
+﻿namespace BibleStudy.Core.Exceptions.Repository;
 
 public class BookNotFoundException : Exception
 {

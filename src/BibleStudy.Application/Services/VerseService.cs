@@ -1,4 +1,5 @@
 ﻿using BibleStudy.Core.DTOs;
+using BibleStudy.Core.Exceptions.Repository;
 using BibleStudy.Core.Interfaces.Repositories;
 using BibleStudy.Core.Interfaces.Services;
 using BibleStudy.Core.Models;
@@ -24,6 +25,9 @@ public class VerseService : IVerseService
                 .GetVerseDtoAsync(translationAbbrev, book, chapter, verseNumber, cancellationToken);
             return Result<VerseDto>.Success(verse);
         }
-        catch()
+        catch (BookNotFoundException ex)
+        {
+            return Result<VerseDto>.Failures();
+        }
     }
 }

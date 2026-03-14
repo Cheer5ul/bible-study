@@ -1,6 +1,6 @@
 ﻿using BibleStudy.Core.DTOs;
+using BibleStudy.Core.Exceptions.Repository;
 using BibleStudy.Core.Interfaces.Repositories;
-using BibleStudy.Persistence.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace BibleStudy.Persistence.Repositories;
