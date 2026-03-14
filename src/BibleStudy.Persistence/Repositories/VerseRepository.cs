@@ -1,6 +1,6 @@
-﻿using BibleStudy.Core.Interfaces;
+﻿using BibleStudy.Core.DTOs;
 using BibleStudy.Core.Interfaces.Repositories;
-using BibleStudy.Core.Models;
+using BibleStudy.Persistence.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace BibleStudy.Persistence.Repositories;
@@ -15,32 +15,38 @@ public class VerseRepository : IVerseRepository
         _context = context;
     }
 
-    public async Task<Verse> GetVerseWithoutVerseIdAsync(string translationAbbrev, string book, int chapter, int verseNumber,
+    public async Task<VerseDto> GetVerseWithoutVerseIdAsync(string translationAbbrev, string book, int chapter, int verseNumber,
         CancellationToken cancellationToken = default)
     {
-        try
+
+        var bookId = await _context.Books
+            .AsNoTracking()
+            .Where(b => b.Name == book)
+            .Select(b => (int?)b.Id)  // returns null if not found 
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (bookId is null)
         {
-            var bookId = await _context.Books
-                .AsNoTracking()
-                .Where(b => b.Name == book)
-                .Select(b => b.Id)
-                .FirstOrDefaultAsync(cancellationToken);
-
-            var result = await _context.Verses
-                .AsNoTracking()
-                .Where(v => v.BookId == bookId &&
-                            v.Chapter == chapter &&
-                            v.VerseNumber == verseNumber)
-                .Select(v => v.Text)
-                .FirstOrDefaultAsync(cancellationToken);
-
-            var verse = Verse.AssembleVerseWithoutVerseId(bookId, chapter, verseNumber, result);
-
-            return verse;
+            throw new BookNotFoundException($"Book '{book}' not found");
         }
-        catch (Exception ex)
+
+        var result = await _context.Verses
+            .AsNoTracking()
+            .Where(v => v.BookId == bookId &&
+                        v.Chapter == chapter &&
+                        v.VerseNumber == verseNumber)
+            .Select(v => v.Text)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (result == null)
         {
-            throw new Exception("Exception thrown while getting verse", ex);
+            throw new VerseNotFoundException(
+                $"Verse not found {book} {chapter}:{verseNumber}");
         }
+        
+        var verse = new VerseDto(book, chapter, verseNumber, result);
+
+        return verse;
+
     }
 }
