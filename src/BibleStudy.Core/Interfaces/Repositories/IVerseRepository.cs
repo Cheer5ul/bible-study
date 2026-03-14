@@ -1,7 +1,9 @@
-﻿namespace BibleStudy.Core.Interfaces.Repositories;
+﻿using BibleStudy.Core.Models;
+
+namespace BibleStudy.Core.Interfaces.Repositories;
 
 public interface IVerseRepository
 {
-    Task<string> GetVerseTextAsync(string translationAbbrev, string book, int chapter, int verseNumber, 
+    Task<Verse> GetVerseWithoutVerseIdAsync(string translationAbbrev, string book, int chapter, int verseNumber, 
         CancellationToken cancellationToken = default);
 }

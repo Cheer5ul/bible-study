@@ -15,23 +15,32 @@ public class VerseRepository : IVerseRepository
         _context = context;
     }
 
-    public async Task<string> GetVerseTextAsync(string translationAbbrev, string book, int chapter, int verseNumber,
+    public async Task<Verse> GetVerseWithoutVerseIdAsync(string translationAbbrev, string book, int chapter, int verseNumber,
         CancellationToken cancellationToken = default)
     {
-        var bookId = await _context.Books
-            .AsNoTracking()
-            .Where(b => b.Name == book)
-            .Select(b => b.Id)
-            .FirstOrDefaultAsync();
+        try
+        {
+            var bookId = await _context.Books
+                .AsNoTracking()
+                .Where(b => b.Name == book)
+                .Select(b => b.Id)
+                .FirstOrDefaultAsync(cancellationToken);
 
-        var result = await _context.Verses
-            .AsNoTracking()
-            .Where(v => v.BookId == bookId &&
-                        v.Chapter == chapter &&
-                        v.VerseNumber == verseNumber)
-            .Select(v => v.Text)
-            .FirstOrDefaultAsync();
+            var result = await _context.Verses
+                .AsNoTracking()
+                .Where(v => v.BookId == bookId &&
+                            v.Chapter == chapter &&
+                            v.VerseNumber == verseNumber)
+                .Select(v => v.Text)
+                .FirstOrDefaultAsync(cancellationToken);
 
-        return result;
+            var verse = Verse.AssembleVerseWithoutVerseId(bookId, chapter, verseNumber, result);
+
+            return verse;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Exception thrown while getting verse", ex);
+        }
     }
 }

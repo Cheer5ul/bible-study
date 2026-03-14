@@ -1,6 +1,6 @@
-﻿using BibleStudy.Core.Interfaces;
-using BibleStudy.Core.Interfaces.Repositories;
+﻿using BibleStudy.Core.Interfaces.Repositories;
 using BibleStudy.Core.Interfaces.Services;
+using BibleStudy.Core.Models;
 
 namespace BibleStudy.Application.Services;
 
@@ -13,9 +13,9 @@ public class VerseService : IVerseService
         _verseRepository = verseRepository;
     }
 
-    public async Task<string> GetVerseTextAsync(string translationAbbrev, string book, int chapter, int verseNumber, 
+    public async Task<Verse> GetVerseWithoutVerseIdAsync(string translationAbbrev, string book, int chapter, int verseNumber, 
         CancellationToken cancellationToken = default)
     {
-        return await _verseRepository.GetVerseTextAsync(translationAbbrev, book, chapter, verseNumber);
+        
     }
 }
