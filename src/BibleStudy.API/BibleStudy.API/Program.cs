@@ -1,11 +1,16 @@
+using System.Globalization;
 using BibleStudy.Application.Services;
 using BibleStudy.Core.Interfaces.Repositories;
 using BibleStudy.Core.Interfaces.Services;
 using BibleStudy.Persistence;
 using BibleStudy.Persistence.Repositories;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly, includeInternalTypes: true);
 
 var configuration = builder.Configuration;
 
@@ -20,6 +25,10 @@ builder.Services.AddDbContext<BibleStudyDbContext>(options =>
 
 builder.Services.AddScoped<IVerseRepository, VerseRepository>();
 builder.Services.AddScoped<IVerseService, VerseService>();
+
+// Fluent Validators
+builder.Services.AddFluentValidationAutoValidation();
+ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en-US");
 
 var app = builder.Build();
 

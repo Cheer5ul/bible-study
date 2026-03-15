@@ -1,4 +1,6 @@
-﻿using BibleStudy.Core.Interfaces.Services;
+﻿using BibleStudy.API.Contracts.Verse;
+using BibleStudy.Core.DTOs;
+using BibleStudy.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibleStudy.API.Controllers;
@@ -15,11 +17,21 @@ public class VerseController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<string>> GetVerseTextAsync(string translationAbbrev, string book, int chapter, int verseNumber, 
+    public async Task<ActionResult<VerseDto>> GetVerseAsync([FromQuery] VerseRequest request, 
         CancellationToken cancellationToken)
     {
-        var verseText =
-            await _verseService.GetVerseTextAsync(translationAbbrev, book, chapter, verseNumber, cancellationToken);
-        return Ok(verseText);
+        var result = await _verseService.GetVerseDtoAsync(
+            request.TranslationAbbrev,
+            request.Book, 
+            request.Chapter, 
+            request.VerseNumber,
+            cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return BadRequest(result.Errors);
+        }
+        
+        return Ok(result.Value);
     }
 }

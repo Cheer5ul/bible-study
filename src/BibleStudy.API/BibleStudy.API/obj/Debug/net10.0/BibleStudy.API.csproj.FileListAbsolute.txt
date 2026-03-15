@@ -129,3 +129,6 @@ D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.API\BibleStudy.API\bin\Debug\
 D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.API\BibleStudy.API\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.API\BibleStudy.API\bin\Debug\net10.0\BibleStudy.Application.dll
 D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.API\BibleStudy.API\bin\Debug\net10.0\BibleStudy.Application.pdb
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.API\BibleStudy.API\bin\Debug\net10.0\FluentValidation.dll
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.API\BibleStudy.API\bin\Debug\net10.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\RiderProjects\BibleStudyPlatform\src\BibleStudy.API\BibleStudy.API\bin\Debug\net10.0\FluentValidation.AspNetCore.dll
