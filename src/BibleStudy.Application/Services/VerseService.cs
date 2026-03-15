@@ -4,6 +4,7 @@ using BibleStudy.Core.Interfaces.Repositories;
 using BibleStudy.Core.Interfaces.Services;
 using BibleStudy.Core.Models;
 using BibleStudy.Core.Results;
+using BibleStudy.Core.Results.Errors;
 
 namespace BibleStudy.Application.Services;
 
@@ -27,7 +28,11 @@ public class VerseService : IVerseService
         }
         catch (BookNotFoundException ex)
         {
-            return Result<VerseDto>.Failures();
+            return Result<VerseDto>.Failures([BookErrors.NotFound(book)]);
+        }
+        catch (VerseNotFoundException ex)
+        {
+            return Result<VerseDto>.Failures([VerseErrors.NotFound(book,  chapter, verseNumber)]);
         }
     }
 }
