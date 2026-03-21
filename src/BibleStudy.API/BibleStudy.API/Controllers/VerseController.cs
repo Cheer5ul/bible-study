@@ -16,7 +16,7 @@ public class VerseController : ControllerBase
         _verseService = verseService;
     }
 
-    [HttpGet]
+    [HttpGet("get-verse")]
     public async Task<ActionResult<VerseDto>> GetVerseAsync([FromQuery] VerseRequest request, 
         CancellationToken cancellationToken)
     {
@@ -25,6 +25,24 @@ public class VerseController : ControllerBase
             request.Book, 
             request.Chapter, 
             request.VerseNumber,
+            cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return BadRequest(result.Errors);
+        }
+        
+        return Ok(result.Value);
+    }
+
+    [HttpGet("get-chapter")]
+    public async Task<ActionResult<ChapterDto>> GetChapterAsync([FromQuery] ChapterRequest request,
+        CancellationToken cancellationToken)
+    {
+        var result = await _verseService.GetChapterDtoAsync(
+            request.TranslationAbbrev,
+            request.Book,
+            request.Chapter,
             cancellationToken);
 
         if (result.IsFailure)
