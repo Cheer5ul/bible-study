@@ -70,6 +70,12 @@ public class VerseRepository : IVerseRepository
             .Select(v => new {v.VerseNumber, v.Text})
             .ToListAsync(cancellationToken);
 
+        if (result is null)
+        {
+            throw new ChapterNotFoundException(
+                $"Chapter not found {book} {chapter}");
+        }
+
         var verses = result.Select(v => new VerseLineDto(v.VerseNumber, v.Text)).ToList();
         
         var chapterDto = new ChapterDto(translationAbbrev, book, chapter, verses);

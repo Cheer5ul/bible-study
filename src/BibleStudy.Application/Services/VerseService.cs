@@ -2,7 +2,6 @@
 using BibleStudy.Core.Exceptions.Repository;
 using BibleStudy.Core.Interfaces.Repositories;
 using BibleStudy.Core.Interfaces.Services;
-using BibleStudy.Core.Models;
 using BibleStudy.Core.Results;
 using BibleStudy.Core.Results.Errors;
 
@@ -22,9 +21,9 @@ public class VerseService : IVerseService
     {
         try
         {
-            var verse = await _verseRepository
+            var resultVerse = await _verseRepository
                 .GetVerseDtoAsync(translationAbbrev, book, chapter, verseNumber, cancellationToken);
-            return Result<VerseDto>.Success(verse);
+            return Result<VerseDto>.Success(resultVerse);
         }
         catch (BookNotFoundException ex)
         {
@@ -33,6 +32,25 @@ public class VerseService : IVerseService
         catch (VerseNotFoundException ex)
         {
             return Result<VerseDto>.Failures([VerseErrors.NotFound(book,  chapter, verseNumber)]);
+        }
+    }
+
+    public async Task<Result<ChapterDto>> GetChapterDtoAsync(string translationAbbrev, string book, int chapter,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var resultChapter = await _verseRepository
+                .GetChapterAsync(translationAbbrev, book, chapter, cancellationToken);
+            return Result<ChapterDto>.Success(resultChapter);
+        }
+        catch (BookNotFoundException ex)
+        {
+            return Result<ChapterDto>.Failures([BookErrors.NotFound(book)]);
+        }
+        catch (ChapterNotFoundException ex)
+        {
+            return Result<ChapterDto>.Failures([ChapterErrors.NotFound(book, chapter)]);
         }
     }
 }
