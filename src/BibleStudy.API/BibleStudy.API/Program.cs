@@ -26,6 +26,9 @@ builder.Services.AddDbContext<BibleStudyDbContext>(options =>
 builder.Services.AddScoped<IVerseRepository, VerseRepository>();
 builder.Services.AddScoped<IVerseService, VerseService>();
 
+builder.Services.AddScoped<IChapterRepository, ChapterRepository>();
+builder.Services.AddScoped<IChapterService, ChapterService>();
+
 // Fluent Validators
 builder.Services.AddFluentValidationAutoValidation();
 ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en-US");

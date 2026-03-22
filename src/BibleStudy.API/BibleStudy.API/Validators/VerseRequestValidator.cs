@@ -5,6 +5,8 @@ namespace BibleStudy.API.Validators;
 
 public class VerseRequestValidator : AbstractValidator<VerseRequest>
 {
+    // Bible book names for request validation
+    // Canonical list is maintained here since validation is API-layer concern
     private static readonly string[] ValidBooks =
     {
         "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Ruth",

@@ -34,23 +34,5 @@ public class VerseService : IVerseService
             return Result<VerseDto>.Failures([VerseErrors.NotFound(book,  chapter, verseNumber)]);
         }
     }
-
-    public async Task<Result<ChapterDto>> GetChapterDtoAsync(string translationAbbrev, string book, int chapter,
-        CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            var resultChapter = await _verseRepository
-                .GetChapterAsync(translationAbbrev, book, chapter, cancellationToken);
-            return Result<ChapterDto>.Success(resultChapter);
-        }
-        catch (BookNotFoundException ex)
-        {
-            return Result<ChapterDto>.Failures([BookErrors.NotFound(book)]);
-        }
-        catch (ChapterNotFoundException ex)
-        {
-            return Result<ChapterDto>.Failures([ChapterErrors.NotFound(book, chapter)]);
-        }
-    }
+    
 }
