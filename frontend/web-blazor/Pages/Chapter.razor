@@ -1,0 +1,25 @@
+﻿@page "/chapter"
+@inject HttpClient HttpClient
+
+<PageTitle>Chapter</PageTitle>
+
+<h1>Read book chapters from the Bible</h1>
+
+@if (chapter is not null)
+{
+     <h2>@chapter.BookName @chapter.Chapter</h2>
+     @foreach (var verse in chapter.Verses)
+     {
+          <p><b>@verse.VerseNumber</b> @verse.Text</p>
+     }
+}
+
+@code
+{
+     private ChapterDto? chapter;
+     protected override async Task OnInitializedAsync()
+     {
+          chapter = await HttpClient.GetFromJsonAsync<ChapterDto>
+               ("api/Chapter?TranslationAbbrev=ASV&Book=Genesis&Chapter=1");
+     }
+}
