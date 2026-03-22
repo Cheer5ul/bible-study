@@ -29,6 +29,17 @@ builder.Services.AddScoped<IVerseService, VerseService>();
 builder.Services.AddScoped<IChapterRepository, ChapterRepository>();
 builder.Services.AddScoped<IChapterService, ChapterService>();
 
+// CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("BlazorPolicy", policy =>
+    {
+        policy.WithOrigins("http://localhost:5051/")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 // Fluent Validators
 builder.Services.AddFluentValidationAutoValidation();
 ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en-US");
