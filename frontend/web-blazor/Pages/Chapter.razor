@@ -5,6 +5,13 @@
 
 <h1>Read book chapters from the Bible</h1>
 
+<button @onclick="LoadChapter">Load Chapter</button>
+
+@if (error is not null)
+{
+     <p style="color: red">@error</p>
+}
+
 @if (chapter is not null)
 {
      <h2>@chapter.BookName @chapter.Chapter</h2>
@@ -17,9 +24,18 @@
 @code
 {
      private ChapterDto? chapter;
-     protected override async Task OnInitializedAsync()
+     private string? error;
+
+     private async Task LoadChapter()
      {
-          chapter = await HttpClient.GetFromJsonAsync<ChapterDto>
-               ("api/Chapter?TranslationAbbrev=ASV&Book=Genesis&Chapter=1");
+          try
+          {
+               chapter = await HttpClient.GetFromJsonAsync<ChapterDto>
+                    ("api/Chapter?TranslationAbbrev=ASV&Book=Genesis&Chapter=1");
+          }
+          catch (Exception ex)
+          {
+               error = ex.Message;
+          }
      }
 }
