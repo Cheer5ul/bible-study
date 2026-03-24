@@ -52,10 +52,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("BlazorPolicy");
-
 app.UseHttpsRedirection();
     
 app.MapControllers();
+
+app.UseCors("BlazorPolicy");
 
 app.Run();
