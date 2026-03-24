@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BibleStudy.API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class ChapterController : ControllerBase
 {
     private readonly IChapterService _chapterService;
