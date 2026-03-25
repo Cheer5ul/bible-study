@@ -207,6 +207,9 @@ D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroo
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\icudt_CJK.tjcz0u77k5.dat
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\icudt_EFIGS.tptq2av103.dat
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\icudt_no_CJK.lfu7j35m59.dat
+D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\web-blazor.6e74ar1xpu.wasm
+D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\web-blazor.8x23sw3jtg.pdb
+D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\dotnet.1ch9zin8o7.js
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\blazor.webassembly.66stpp682q.js.gz
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\Microsoft.AspNetCore.Authorization.3ur142rhlk.wasm.gz
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\Microsoft.AspNetCore.Components.ld1j2d23tn.wasm.gz
@@ -415,6 +418,9 @@ D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroo
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\icudt_CJK.tjcz0u77k5.dat.gz
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\icudt_EFIGS.tptq2av103.dat.gz
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\icudt_no_CJK.lfu7j35m59.dat.gz
+D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\web-blazor.6e74ar1xpu.wasm.gz
+D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\web-blazor.8x23sw3jtg.pdb.gz
+D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\dotnet.1ch9zin8o7.js.gz
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\web-blazor.staticwebassets.runtime.json
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\web-blazor.staticwebassets.endpoints.json
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\web-blazor.dll
@@ -1105,6 +1111,10 @@ D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\compre
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\compressed\19wd06pss7-{0}-tjcz0u77k5-tjcz0u77k5.gz
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\compressed\o1j1t5bo1y-{0}-tptq2av103-tptq2av103.gz
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\compressed\sup657jllv-{0}-lfu7j35m59-lfu7j35m59.gz
+D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\compressed\ooe2tjt2zt-{0}-6e74ar1xpu-6e74ar1xpu.gz
+D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\compressed\6c47nszvet-{0}-8x23sw3jtg-8x23sw3jtg.gz
+D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\compressed\3ux6ze99ze-{0}-1ch9zin8o7-1ch9zin8o7.gz
+D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\compressed\hc8mxz1qv5-{0}-0am68hs35m-0am68hs35m.gz
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\staticwebassets.build.json
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\staticwebassets.build.json.cache
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\staticwebassets.development.json
@@ -1115,13 +1125,3 @@ D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\web-bl
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\refint\web-blazor.dll
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\web-blazor.pdb
 D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\ref\web-blazor.dll
-D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\web-blazor.4yrw77gvlg.wasm
-D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\web-blazor.e40xg61m1w.pdb
-D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\dotnet.rakrkh5ldi.js
-D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\web-blazor.4yrw77gvlg.wasm.gz
-D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\web-blazor.e40xg61m1w.pdb.gz
-D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\bin\Debug\net10.0\wwwroot\_framework\dotnet.rakrkh5ldi.js.gz
-D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\compressed\ooe2tjt2zt-{0}-4yrw77gvlg-4yrw77gvlg.gz
-D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\compressed\6c47nszvet-{0}-e40xg61m1w-e40xg61m1w.gz
-D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\compressed\3ux6ze99ze-{0}-rakrkh5ldi-rakrkh5ldi.gz
-D:\RiderProjects\BibleStudyPlatform\frontend\web-blazor\obj\Debug\net10.0\compressed\hc8mxz1qv5-{0}-g469di7jpu-g469di7jpu.gz

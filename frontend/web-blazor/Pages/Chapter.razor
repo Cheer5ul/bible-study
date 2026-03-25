@@ -5,17 +5,26 @@
 
 <h1>Read book chapters from the Bible</h1>
 
-<button @onclick="LoadChapter">Load Chapter</button>
+<form @onsubmit="LoadChapter">
+     <label for="bookName">Book Name</label>
+     <input id="bookName" @bind="bookName" type="text" placeholder="Genesis"/>
+     
+     <label for="chapterNumber">Chapter</label>
+     <input id="chapterNumber" @bind="chapterNumber" type="number"placeholder="1"/>
+     
+     <button type="submit">Load Chapter</button>
+</form>
+
 
 @if (error is not null)
 {
      <p style="color: red">@error</p>
 }
 
-@if (chapter is not null)
+@if (chapterDto is not null)
 {
-     <h2>@chapter.BookName @chapter.Chapter</h2>
-     @foreach (var verse in chapter.Verses)
+     <h3>@chapterDto.BookName @chapterDto.Chapter</h3>
+     @foreach (var verse in chapterDto.Verses)
      {
           <p><b>@verse.VerseNumber</b> @verse.Text</p>
      }
@@ -23,15 +32,17 @@
 
 @code
 {
-     private ChapterDto? chapter;
+     private ChapterDto? chapterDto;
      private string? error;
+     private string?bookName;
+     private int? chapterNumber;
 
      private async Task LoadChapter()
      {
           try
           {
-               chapter = await HttpClient.GetFromJsonAsync<ChapterDto>
-                    ("api/Chapter?TranslationAbbrev=ASV&Book=Genesis&Chapter=1");
+               chapterDto = await HttpClient.GetFromJsonAsync<ChapterDto>
+                    ($"api/Chapter?TranslationAbbrev=ASV&Book={bookName}&Chapter={chapterNumber}");
           }
           catch (Exception ex)
           {
