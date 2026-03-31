@@ -1,4 +1,5 @@
 ﻿using BibleStudy.API.Contracts.Verse;
+using BibleStudy.API.Handlers;
 using BibleStudy.Core.DTOs;
 using BibleStudy.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@ namespace BibleStudy.API.Controllers;
 public class VerseController : ControllerBase
 {
     private readonly IVerseService _verseService;
+    private readonly IFailureHandler _failureHandler;
 
-    public VerseController(IVerseService verseService)
+    public VerseController(IVerseService verseService, IFailureHandler failureHandler)
     {
         _verseService = verseService;
+        _failureHandler = failureHandler;
     }
 
     [HttpGet]
@@ -29,9 +32,9 @@ public class VerseController : ControllerBase
         
         if (result.IsFailure)
         {
+            var error = _failureHandler.HandleFailure(result, HttpContext);
             
-            
-            return BadRequest(result.Errors);
+            return BadRequest(error);
         }
         
         return Ok(result.Value);
