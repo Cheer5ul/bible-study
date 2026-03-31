@@ -1,30 +1,34 @@
 ﻿@page "/chapter"
+@using System.Text.Json
 @inject HttpClient HttpClient
 
 <PageTitle>Chapter</PageTitle>
 
 <h1>Read book chapters from the Bible</h1>
 
-<form @onsubmit="LoadChapter">
+<form @onsubmit="LoadChapter" @onsubmit:preventDefault>
+     <label for="translationAbbr">Translation Abbreviation</label>
+     <input id="translationAbbr" @bind="_translationAbbr" type="text" placeholder="ASV"/>
+     
      <label for="bookName">Book Name</label>
-     <input id="bookName" @bind="bookName" type="text" placeholder="Genesis"/>
-     
+     <input id="bookName" @bind="_bookName" type="text" placeholder="Genesis"/>
+
      <label for="chapterNumber">Chapter</label>
-     <input id="chapterNumber" @bind="chapterNumber" type="number"placeholder="1"/>
-     
+     <input id="chapterNumber" @bind="_chapterNumber" type="number"placeholder="1"/>
+
      <button type="submit">Load Chapter</button>
 </form>
 
 
-@if (error is not null)
+@if (_exception is not null)
 {
-     <p style="color: red">@error</p>
+     <p style="color: red">Incorrect request: @(_error == null ? _exception : _error)</p>
 }
 
-@if (chapterDto is not null)
+@if (_chapterDto is not null)
 {
-     <h3>@chapterDto.BookName @chapterDto.Chapter</h3>
-     @foreach (var verse in chapterDto.Verses)
+     <h3>@_chapterDto.BookName @_chapterDto.Chapter</h3>
+     @foreach (var verse in _chapterDto.Verses)
      {
           <p><b>@verse.VerseNumber</b> @verse.Text</p>
      }
@@ -32,21 +36,39 @@
 
 @code
 {
-     private ChapterDto? chapterDto;
-     private string? error;
-     private string?bookName;
-     private int? chapterNumber;
+     private ChapterDto? _chapterDto;
+     private string? _exception;
+     private string?_bookName;
+     private int? _chapterNumber;
+     private string? _translationAbbr;
+     private Error? _error;
 
+     private string? _errorResponse;
      private async Task LoadChapter()
      {
           try
           {
-               chapterDto = await HttpClient.GetFromJsonAsync<ChapterDto>
-                    ($"api/Chapter?TranslationAbbrev=ASV&Book={bookName}&Chapter={chapterNumber}");
+               var response = await HttpClient.GetAsync
+                    ($"api/Chapter?TranslationAbbrev={_translationAbbr}&Book={_bookName}&Chapter={_chapterNumber}");
+
+               if (response.IsSuccessStatusCode)
+               {
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    _chapterDto = JsonSerializer.Deserialize<ChapterDto>(responseString,
+                         new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+               }
+               else
+               {
+                    _errorResponse = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(_errorResponse);
+                    var errors = JsonSerializer.Deserialize<List<Error>>(_errorResponse,
+                         new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
+                    _error = errors?.FirstOrDefault();
+               }
           }
           catch (Exception ex)
           {
-               error = ex.Message;
+               _exception = ex.Message;
           }
      }
 }
