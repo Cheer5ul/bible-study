@@ -26,9 +26,11 @@ public class VerseController : ControllerBase
             request.Chapter, 
             request.VerseNumber,
             cancellationToken);
-
+        
         if (result.IsFailure)
         {
+            
+            
             return BadRequest(result.Errors);
         }
         

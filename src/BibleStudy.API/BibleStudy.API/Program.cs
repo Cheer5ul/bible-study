@@ -1,4 +1,5 @@
 using System.Globalization;
+using BibleStudy.API.Handlers;
 using BibleStudy.Application.Services;
 using BibleStudy.Core.Interfaces.Repositories;
 using BibleStudy.Core.Interfaces.Services;
@@ -28,6 +29,8 @@ builder.Services.AddScoped<IVerseService, VerseService>();
 
 builder.Services.AddScoped<IChapterRepository, ChapterRepository>();
 builder.Services.AddScoped<IChapterService, ChapterService>();
+
+builder.Services.AddScoped<IFailureHandler, FailureHandler>();
 
 // CORS policy
 builder.Services.AddCors(options =>
