@@ -1,4 +1,6 @@
 ﻿using BibleStudy.API.Contracts.Verse;
+using BibleStudy.Core.Models;
+using BibleStudy.Core.Results.Errors;
 using FluentValidation;
 
 namespace BibleStudy.API.Validators;
@@ -29,6 +31,7 @@ public class ChapterRequestValidator : AbstractValidator<ChapterRequest>
         RuleFor(x => x.Book)
             .NotEmpty()
             .Must(b => ValidBooks.Contains(b))
+            .WithErrorCode(BookErrors.NotFoundCode)
             .WithMessage("Book '{PropertyValue}' is not a valid Bible book name");
 
         RuleFor(x => x.Chapter)

@@ -1,5 +1,6 @@
 using System.Globalization;
 using BibleStudy.API.Handlers;
+using BibleStudy.API.Middlewares;
 using BibleStudy.Application.Services;
 using BibleStudy.Core.Interfaces.Repositories;
 using BibleStudy.Core.Interfaces.Services;
@@ -14,6 +15,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly, includeInternalTypes: true);
 
 var configuration = builder.Configuration;
+
+builder.Services.AddProblemDetails(configure =>
+{
+    configure.CustomizeProblemDetails = context =>
+    {
+        context.ProblemDetails.Extensions.TryAdd("requestId", context.HttpContext.TraceIdentifier);
+    };
+});
+builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -56,6 +67,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseExceptionHandler();
     
 app.MapControllers();
 
