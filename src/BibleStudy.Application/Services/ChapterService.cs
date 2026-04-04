@@ -19,6 +19,9 @@ public class ChapterService : IChapterService
     public async Task<Result<ChapterDto>> GetChapterDtoAsync(string translationAbbrev, string book, int chapter,
         CancellationToken cancellationToken = default)
     {
+        
+        
+        
         try
         {
             var resultChapter = await _chapterRepository

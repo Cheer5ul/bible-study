@@ -22,7 +22,7 @@ public class FailureHandler : IFailureHandler
             Extensions = GetErrorsExtension(result.Errors)!
         };
 
-        return new ObjectResult(problem);
+        return new ObjectResult(problem) {StatusCode = problem.Status} ;
     }
 
     public Dictionary<string, object>? GetErrorsExtension(IReadOnlyList<Error> errors)

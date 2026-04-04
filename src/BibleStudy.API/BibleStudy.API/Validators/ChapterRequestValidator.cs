@@ -1,5 +1,4 @@
 ﻿using BibleStudy.API.Contracts.Verse;
-using BibleStudy.Core.Models;
 using BibleStudy.Core.Results.Errors;
 using FluentValidation;
 

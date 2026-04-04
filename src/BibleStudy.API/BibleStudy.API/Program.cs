@@ -1,4 +1,5 @@
 using System.Globalization;
+using BibleStudy.API.Contracts.Verse;
 using BibleStudy.API.Handlers;
 using BibleStudy.API.Middlewares;
 using BibleStudy.Application.Services;
@@ -7,12 +8,16 @@ using BibleStudy.Core.Interfaces.Services;
 using BibleStudy.Persistence;
 using BibleStudy.Persistence.Repositories;
 using FluentValidation;
-using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using BibleStudy.API.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly, includeInternalTypes: true);
+
+// Fluent Validators
+builder.Services.AddValidatorsFromAssemblyContaining<ChapterRequestValidator>();
+builder.Services.AddScoped<IValidator<ChapterRequest>, ChapterRequestValidator>();
 
 var configuration = builder.Configuration;
 
@@ -53,10 +58,6 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
     });
 });
-
-// Fluent Validators
-builder.Services.AddFluentValidationAutoValidation();
-ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en-US");
 
 var app = builder.Build();
 
