@@ -1,4 +1,5 @@
-﻿using BibleStudy.Core.Results;
+﻿using BibleStudy.API.Shared;
+using BibleStudy.Core.Results;
 using BibleStudy.Core.Results.Errors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,11 +22,11 @@ public class FailureHandler : IFailureHandler
             Type = "https://tools.ietf.org/html/rfc9110#section-15.5.1",
             Extensions = GetErrorsExtension(result.Errors)!
         };
-
-        return new ObjectResult(problem) {StatusCode = problem.Status} ;
+        
+        return new ObjectResult(problem);
     }
 
-    public Dictionary<string, object>? GetErrorsExtension(IReadOnlyList<Error> errors)
+    protected static Dictionary<string, object>? GetErrorsExtension(IReadOnlyList<Error> errors)
     {
         if (!errors.Any())
         {

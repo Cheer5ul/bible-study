@@ -24,4 +24,8 @@
       <ProjectReference Include="..\..\BibleStudy.Persistence\BibleStudy.Persistence.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Exceptions\" />
+    </ItemGroup>
+
 </Project>

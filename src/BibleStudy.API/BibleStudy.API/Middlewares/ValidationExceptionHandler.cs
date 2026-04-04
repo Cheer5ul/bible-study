@@ -1,6 +1,6 @@
-﻿using FluentValidation;
+﻿using BibleStudy.API.Shared;
+using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BibleStudy.API.Middlewares;
 
@@ -17,27 +17,20 @@ internal sealed class ValidationExceptionHandler(
         {
             return false;
         }
-
+        
         httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-        var context = new ProblemDetailsContext()
+        
+        var problemDetails = ApiProblemDetailsFactory.Create(validationException, httpContext);
+        
+        var problemDetailsContext = new ProblemDetailsContext()
         {
             HttpContext = httpContext,
-            Exception = exception,
-            ProblemDetails = new ProblemDetails()
-            {   
-                Detail = "One or more validation errors occurred",
-                Status = StatusCodes.Status400BadRequest
-            }
+            Exception = validationException,
+            ProblemDetails = problemDetails
         };
+        
+        problemDetailsContext.ProblemDetails.Extensions.Add("errors", problemDetails);
 
-        var errors = validationException.Errors
-            .GroupBy(e => e.PropertyName)
-            .ToDictionary(
-                g => g.Key.ToLowerInvariant(),
-                g => g.Select(e => e.ErrorMessage).ToArray()
-            );
-        context.ProblemDetails.Extensions.Add("errors", errors);
-
-        return await problemDetailsService.TryWriteAsync(context);
+        return await problemDetailsService.TryWriteAsync(problemDetailsContext);
     }
 }
