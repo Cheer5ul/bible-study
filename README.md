@@ -2,7 +2,7 @@
  
 <div align="center">
  
-![.NET](https://img.shields.io/badge/.NET_8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![.NET](https://img.shields.io/badge/.NET_10-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
 ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![EF Core](https://img.shields.io/badge/EF_Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
@@ -95,8 +95,8 @@ GET /api/verses?translationAbbrev=ASV&book=Genesis&chapter=1&verseNumber=1
  
 | Layer | Technology |
 |---|---|
-| Runtime | .NET 8 |
-| Language | C# 12 |
+| Runtime | .NET 10 |
+| Language | C# 14 |
 | Database | PostgreSQL |
 | ORM | Entity Framework Core |
 | Validation | FluentValidation |
@@ -126,7 +126,7 @@ GET /api/verses?translationAbbrev=ASV&book=Genesis&chapter=1&verseNumber=1
  
 ### Prerequisites
  
-- [.NET 8 SDK](https://dotnet.microsoft.com/download)
+- [.NET 10 SDK](https://dotnet.microsoft.com/download)
 - [PostgreSQL](https://www.postgresql.org/)
  
 ### Setup
