@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BibleStudy.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2473cea5475c6afa7dbe45ff454ee25da4084bef")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+abccadb76f2741db45734d485a6d76002c19d8af")]
 [assembly: System.Reflection.AssemblyProductAttribute("BibleStudy.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BibleStudy.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -27,5 +27,20 @@ public abstract class ApiProblemDetailsFactory
 
         return problemDetails;
     }
-    
+
+    public static ProblemDetails Create(
+        Exception exception,
+        HttpContext httpContext)
+    {
+        httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+
+        var problemDetails = new ProblemDetails()
+        {
+            Type = exception.GetType().Name,
+            Title = "An error occured",
+            Detail = exception.Message,
+        };
+        
+        return problemDetails;
+    }
 }

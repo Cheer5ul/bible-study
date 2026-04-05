@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using BibleStudy.API.Shared;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibleStudy.API.Middlewares;
@@ -18,22 +19,13 @@ internal sealed class GlobalExceptionHandler(
     {
         logger.LogError(exception, "Unhandled exceptin occured");
 
-        httpContext.Response.StatusCode = exception switch
-        {
-            ApplicationException => StatusCodes.Status400BadRequest,
-            _ => StatusCodes.Status500InternalServerError
-        };
-
+        var problemDetails = ApiProblemDetailsFactory.Create(exception, httpContext);
+        
         return await problemDetailsService.TryWriteAsync(new ProblemDetailsContext()
         {
             HttpContext = httpContext,
             Exception = exception,
-            ProblemDetails = new ProblemDetails()
-            {
-                Type = exception.GetType().Name,
-                Title = "An error occured",
-                Detail = exception.Message,
-            }
+            ProblemDetails = problemDetails
         });
     }
 }
