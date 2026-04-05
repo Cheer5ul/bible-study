@@ -1,11 +1,15 @@
-﻿using BibleStudy.Core.Results.Errors;
+﻿using BibleStudy.Core.Results;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibleStudy.API.Shared;
 
-public abstract class ApiProblemDetailsFactory
+public static class ApiProblemDetailsFactory
 {
+    /// <summary>
+    /// Creates a 400 Bad Request ProblemDetails for a FluentValidation exception,
+    /// grouping errors by property name
+    /// </summary>
     public static ProblemDetails Create(
         ValidationException validationException,
         HttpContext httpContext)
@@ -14,7 +18,9 @@ public abstract class ApiProblemDetailsFactory
 
         var problemDetails = new ProblemDetails()
         {
-            Detail = "One or more validation errors occurred",
+            Type = validationException.GetType().Name,
+            Title = "An error occured",
+            Detail = validationException.Message,
             Status = StatusCodes.Status400BadRequest
         };
         
@@ -24,10 +30,15 @@ public abstract class ApiProblemDetailsFactory
                 g => g.Key.ToLowerInvariant(),
                 g => g.Select(e => e.ErrorMessage).ToArray()
             );
+        
+        problemDetails.Extensions.Add("errors", errors);
 
         return problemDetails;
     }
-
+    
+    /// <summary>
+    /// Creates a 500 Internal Server Error ProblemDetails for an unhandled exception
+    /// </summary>
     public static ProblemDetails Create(
         Exception exception,
         HttpContext httpContext)
@@ -39,8 +50,10 @@ public abstract class ApiProblemDetailsFactory
             Type = exception.GetType().Name,
             Title = "An error occured",
             Detail = exception.Message,
+            Status = StatusCodes.Status500InternalServerError
         };
         
         return problemDetails;
     }
+    
 }

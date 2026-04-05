@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Globalization;
 using BibleStudy.API.Contracts.Verse;
 using BibleStudy.API.Handlers;
@@ -10,6 +11,7 @@ using BibleStudy.Persistence.Repositories;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using BibleStudy.API.Validators;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +27,10 @@ builder.Services.AddProblemDetails(configure =>
 {
     configure.CustomizeProblemDetails = context =>
     {
-        context.ProblemDetails.Extensions.TryAdd("requestId", context.HttpContext.TraceIdentifier);
+        context.ProblemDetails.Instance = $"{context.HttpContext.Request.Method} {context.HttpContext.Request.Path}";
+        context.ProblemDetails.Extensions["requestId"] = context.HttpContext.TraceIdentifier;
+        Activity? activity = context.HttpContext.Features.Get<IHttpActivityFeature>()?.Activity;
+        context.ProblemDetails.Extensions["traceId"] = activity?.Id;
     };
 });
 builder.Services.AddExceptionHandler<ValidationExceptionHandler>();

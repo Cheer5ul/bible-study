@@ -7,14 +7,21 @@ namespace BibleStudy.API.Handlers;
 
 public class FailureHandler : IFailureHandler
 {
-    public ActionResult HandleFailure(Result result, HttpContext httpContext)
+    private readonly IProblemDetailsService _problemDetailsService;
+
+    public FailureHandler(IProblemDetailsService problemDetailsService)
+    {
+        _problemDetailsService = problemDetailsService;
+    }
+    
+    public async Task<ActionResult> HandleFailure(Result result, HttpContext httpContext)
     {
         if (!result.IsFailure)
         {
             throw new InvalidOperationException("Cannot handle successful result.");
         }
         
-        var problem = new ProblemDetails()
+        var problemDetails = new ProblemDetails()
         {
             // need to make methods to detect each field
             Status = StatusCodes.Status400BadRequest,
@@ -23,7 +30,15 @@ public class FailureHandler : IFailureHandler
             Extensions = GetErrorsExtension(result.Errors)!
         };
         
-        return new ObjectResult(problem);
+        httpContext.Response.StatusCode = problemDetails.Status.Value;
+
+        await _problemDetailsService.TryWriteAsync(new ProblemDetailsContext()
+        {
+            HttpContext = httpContext,
+            ProblemDetails = problemDetails
+        });
+
+        return new EmptyResult();
     }
 
     protected static Dictionary<string, object>? GetErrorsExtension(IReadOnlyList<Error> errors)

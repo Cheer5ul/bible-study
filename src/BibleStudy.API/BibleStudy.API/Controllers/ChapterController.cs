@@ -42,7 +42,7 @@ public class ChapterController : ControllerBase
             
             var validationErrorResult = Result<ChapterRequest>.Failures(errors);
 
-            return _failureHandler.HandleFailure(validationErrorResult, HttpContext);
+            return await _failureHandler.HandleFailure(validationErrorResult, HttpContext);
         }
         
         var result = await _chapterService.GetChapterDtoAsync(
@@ -53,7 +53,7 @@ public class ChapterController : ControllerBase
 
         if (result.IsFailure)
         {
-            return _failureHandler.HandleFailure(result, HttpContext);
+            return await _failureHandler.HandleFailure(result, HttpContext);
         }
         
         return Ok(result.Value);

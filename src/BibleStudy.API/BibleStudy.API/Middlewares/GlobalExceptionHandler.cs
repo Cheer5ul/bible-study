@@ -1,6 +1,5 @@
 ﻿using BibleStudy.API.Shared;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BibleStudy.API.Middlewares;
 
@@ -11,13 +10,12 @@ internal sealed class GlobalExceptionHandler(
     IProblemDetailsService problemDetailsService,
     ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
 {
-    
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext, 
         Exception exception, 
         CancellationToken cancellationToken)
     {
-        logger.LogError(exception, "Unhandled exceptin occured");
+        logger.LogError(exception, "Unhandled excepting occured");
 
         var problemDetails = ApiProblemDetailsFactory.Create(exception, httpContext);
         

@@ -1,6 +1,8 @@
-﻿using BibleStudy.API.Shared;
+﻿using System.Diagnostics;
+using BibleStudy.API.Shared;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace BibleStudy.API.Middlewares;
 
@@ -18,8 +20,6 @@ internal sealed class ValidationExceptionHandler(
             return false;
         }
         
-        httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-        
         var problemDetails = ApiProblemDetailsFactory.Create(validationException, httpContext);
         
         var problemDetailsContext = new ProblemDetailsContext()
@@ -29,8 +29,6 @@ internal sealed class ValidationExceptionHandler(
             ProblemDetails = problemDetails
         };
         
-        problemDetailsContext.ProblemDetails.Extensions.Add("errors", problemDetails);
-
         return await problemDetailsService.TryWriteAsync(problemDetailsContext);
     }
 }
