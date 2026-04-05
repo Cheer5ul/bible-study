@@ -1,6 +1,5 @@
 ﻿@page "/chapter"
-@using System.Text.Json
-@inject HttpClient HttpClient
+@inject ChapterApiClient ChapterApiClient
 
 <PageTitle>Chapter</PageTitle>
 
@@ -22,7 +21,15 @@
 
 @if (_exception is not null)
 {
-     <p style="color: red">Incorrect request: @(_error == null ? _exception : _error)</p>
+     <p style="color: red">@_exception</p>
+}
+
+@if (_errors is not null)
+{
+     @foreach (var error in _errors)
+     {
+          <p style="color: red">@error.Code: @error.Description/</p>
+     }
 }
 
 @if (_chapterDto is not null)
@@ -41,29 +48,23 @@
      private string?_bookName;
      private int? _chapterNumber;
      private string? _translationAbbr;
-     private Error? _error;
+     private IReadOnlyList<ErrorResponse>? _errors;
 
-     private string? _errorResponse;
      private async Task LoadChapter()
      {
           try
           {
-               var response = await HttpClient.GetAsync
-                    ($"api/Chapter?TranslationAbbrev={_translationAbbr}&Book={_bookName}&Chapter={_chapterNumber}");
+               var response = await ChapterApiClient.GetChapterAsync(_translationAbbr, _bookName, _chapterNumber);
 
-               if (response.IsSuccessStatusCode)
+               if (response.chapter == null)
                {
-                    var responseString = await response.Content.ReadAsStringAsync();
-                    _chapterDto = JsonSerializer.Deserialize<ChapterDto>(responseString,
-                         new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    _errors = response.problemDetailsResponse?.Errors;
                }
-               else
+               else if(response.problemDetailsResponse == null)
                {
-                    _errorResponse = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(_errorResponse);
-                    var errors = JsonSerializer.Deserialize<List<Error>>(_errorResponse,
-                         new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
-                    _error = errors?.FirstOrDefault();
+                    _chapterDto = response.chapter;
+                    _errors = null;
+                    _exception = null;
                }
           }
           catch (Exception ex)
@@ -71,4 +72,4 @@
                _exception = ex.Message;
           }
      }
-}
+}         
