@@ -13,7 +13,7 @@
      <input id="bookName" @bind="_bookName" type="text" placeholder="Genesis"/>
 
      <label for="chapterNumber">Chapter</label>
-     <input id="chapterNumber" @bind="_chapterNumber" type="number"placeholder="1"/>
+     <input id="chapterNumber" @bind="_chapterNumber" type="number" placeholder="1"/>
 
      <button type="submit">Load Chapter</button>
 </form>
@@ -28,7 +28,7 @@
 {
      @foreach (var error in _errors)
      {
-          <p style="color: red">@error.Code: @error.Description/</p>
+          <p style="color: red">@error.Description</p>
      }
 }
 
