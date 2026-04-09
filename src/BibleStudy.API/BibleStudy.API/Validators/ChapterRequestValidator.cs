@@ -31,7 +31,7 @@ public class ChapterRequestValidator : AbstractValidator<ChapterRequest>
             .NotEmpty()
             .Must(b => ValidBooks.Contains(b))
             .WithErrorCode(BookErrors.NotFoundCode)
-            .WithMessage("Book '{PropertyValue}' is not a valid Bible book name");
+            .WithMessage("Book '{PropertyValue}' is not a valid Bible book name.");
 
         RuleFor(x => x.Chapter)
             .GreaterThan(0);
