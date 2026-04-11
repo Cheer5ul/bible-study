@@ -21,11 +21,19 @@ public class ChapterRequestValidator : AbstractValidator<ChapterRequest>
         "Hebrews", "James", "1 Peter", "2 Peter", "1 John", "2 John", "3 John", "Jude",
         "Revelation"
     };
+
+    private static readonly string[] ValidTranslationAbbreviations =
+    {
+        "ASV", "KJV"
+    };
+    
     public ChapterRequestValidator()
     {
         RuleFor(x => x.TranslationAbbrev)
             .NotEmpty()
-            .MaximumLength(15);
+            .Must(t => ValidTranslationAbbreviations.Contains(t))
+            .WithErrorCode(TranslationAbbrevErrors.NotFoundCode)
+            .WithMessage("Translation abbreviation '{PropertyValue}' is not a valid translation abbreviation name.");
 
         RuleFor(x => x.Book)
             .NotEmpty()

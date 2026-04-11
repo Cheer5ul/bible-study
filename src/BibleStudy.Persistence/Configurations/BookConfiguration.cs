@@ -13,8 +13,5 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
         builder.Property(c => c.Name)
             .IsRequired()
             .HasMaxLength(100);
-
-        builder.HasOne(x => x.Translation)
-            .WithMany();
     }
 }

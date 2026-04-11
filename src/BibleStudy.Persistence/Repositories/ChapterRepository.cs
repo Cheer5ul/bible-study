@@ -19,13 +19,13 @@ public class ChapterRepository : IChapterRepository
     {
         var bookId = await _context.Books
             .AsNoTracking()
-            .Where(b => b.Name == book)
+            .Where(b => b.Name == book && b.TranslationAbbrev == translationAbbrev)
             .Select(b => (int?)b.Id) // returns null if not found
             .FirstOrDefaultAsync(cancellationToken);
 
         if (bookId is null)
         {
-            throw new BookNotFoundException($"Book '{book}' not found");
+            throw new BookNotFoundException($"Book '{book}' with translation abbreviation {translationAbbrev} was not found");
         }
 
         var result = await _context.Verses

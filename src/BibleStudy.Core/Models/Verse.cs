@@ -14,4 +14,6 @@ public class Verse
     public int VerseNumber { get; private set; }
     /// <summary>Text of scripture reference itself</summary>
     public string Text { get; private set; }
+    ///<summary>The translation this book belongs to e.g. "KJV", "NIV" </summary>
+    public string TranslationAbbrev { get; private set; }
 }

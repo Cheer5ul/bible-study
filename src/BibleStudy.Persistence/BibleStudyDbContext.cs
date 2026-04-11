@@ -15,7 +15,6 @@ public class BibleStudyDbContext : DbContext
     
     public DbSet<Book> Books { get; set; }
     public DbSet<Verse> Verses { get; set; }
-    public DbSet<Translation> Translations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
