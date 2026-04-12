@@ -24,7 +24,7 @@ public class ChapterRequestValidator : AbstractValidator<ChapterRequest>
 
     private static readonly string[] ValidTranslationAbbreviations =
     {
-        "ASV", "KJV"
+        "ASV", "KJV", "RusSynodal"
     };
     
     public ChapterRequestValidator()
