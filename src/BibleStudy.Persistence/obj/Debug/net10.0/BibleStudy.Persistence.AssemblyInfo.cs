@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BibleStudy.Persistence")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c940d226129cf4606ee45e645b473a1bac1ea4a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f810d8e347adcb1ed3ab8c5d70c3279a21de143")]
 [assembly: System.Reflection.AssemblyProductAttribute("BibleStudy.Persistence")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BibleStudy.Persistence")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
