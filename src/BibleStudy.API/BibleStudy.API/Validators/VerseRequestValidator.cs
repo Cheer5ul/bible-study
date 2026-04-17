@@ -11,11 +11,6 @@ public class VerseRequestValidator : AbstractValidator<VerseRequest>
             .NotEmpty()
             .MaximumLength(15);
 
-        RuleFor(x => x.Book)
-            .NotEmpty()
-            .Must(b => Core.Constants.BibleBooks.All.Contains(b))
-            .WithMessage("Book '{PropertyValue}' is not a valid Bible book name");
-
         RuleFor(x => x.Chapter)
             .GreaterThan(0);
         

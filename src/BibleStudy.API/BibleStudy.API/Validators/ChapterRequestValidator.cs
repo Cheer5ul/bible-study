@@ -14,12 +14,6 @@ public class ChapterRequestValidator : AbstractValidator<ChapterRequest>
             .WithErrorCode(TranslationAbbrevErrors.NotFoundCode)
             .WithMessage("Translation abbreviation '{PropertyValue}' is not a valid translation abbreviation name.");
 
-        RuleFor(x => x.Book)
-            .NotEmpty()
-            .Must(b => Core.Constants.BibleBooks.All.Contains(b))
-            .WithErrorCode(BookErrors.NotFoundCode)
-            .WithMessage("Book '{PropertyValue}' is not a valid Bible book name.");
-
         RuleFor(x => x.Chapter)
             .GreaterThan(0);
     }

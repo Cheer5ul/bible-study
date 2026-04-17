@@ -20,7 +20,7 @@ public class ChapterService : IChapterService
         CancellationToken cancellationToken = default)
     {
         
-        // Add some validation
+        
         
         try
         {
