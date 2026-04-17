@@ -51,6 +51,12 @@ builder.Services.AddScoped<IVerseService, VerseService>();
 builder.Services.AddScoped<IChapterRepository, ChapterRepository>();
 builder.Services.AddScoped<IChapterService, ChapterService>();
 
+builder.Services.AddScoped<ITranslationRepository, TranslationRepository>();
+
+
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IBookService, BookService>();
+
 builder.Services.AddScoped<IFailureHandler, FailureHandler>();
 
 // CORS policy

@@ -1,8 +1,10 @@
 ﻿using BibleStudy.Core.DTOs;
+using BibleStudy.Core.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace BibleStudy.Persistence.Repositories;
 
-public class TranslationRepository
+public class TranslationRepository : ITranslationRepository
 {
     private readonly BibleStudyDbContext _context;
 
@@ -11,10 +13,15 @@ public class TranslationRepository
         _context = context;
     }
 
-    public async Task<TranslationDto> GetTranslation(
-        string translationAbbrev,
+    public async Task<bool> TranslationExistsAsync(string translationAbbrev,
         CancellationToken cancellationToken = default)
     {
-        return null;
+        var translation = await _context.Translations
+            .AsNoTracking()
+            .FirstOrDefaultAsync(t => t.TranslationAbbrev == translationAbbrev, cancellationToken);
+
+        if (translation == null) return false;
+        
+        return true;
     }
 }

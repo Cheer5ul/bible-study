@@ -1,4 +1,5 @@
 ﻿using BibleStudy.Core.DTOs;
+using BibleStudy.Core.Exceptions.Repository;
 
 namespace BibleStudy.Core.Interfaces.Repositories;
 
