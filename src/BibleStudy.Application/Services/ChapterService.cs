@@ -10,17 +10,24 @@ namespace BibleStudy.Application.Services;
 public class ChapterService : IChapterService
 {
     private readonly IChapterRepository _chapterRepository;
+    private readonly ITranslationRepository _translationRepository;
 
-    public ChapterService(IChapterRepository chapterRepository)
+    public ChapterService(IChapterRepository chapterRepository, ITranslationRepository translationRepository)
     {
         _chapterRepository = chapterRepository;
+        _translationRepository = translationRepository;
     }
     
     public async Task<Result<ChapterDto>> GetChapterDtoAsync(string translationAbbrev, string book, int chapter,
         CancellationToken cancellationToken = default)
     {
-        
-            
+        // checking if translation exists
+        var isTranslationExists = await _translationRepository.TranslationExistsAsync(translationAbbrev, cancellationToken);
+
+        if (isTranslationExists == false)
+        {
+            return Result<ChapterDto>.Failures([TranslationAbbrevErrors.NotFound(translationAbbrev)]);   
+        }
         
         try
         {
@@ -35,6 +42,25 @@ public class ChapterService : IChapterService
         catch (ChapterNotFoundException ex)
         {
             return Result<ChapterDto>.Failures([ChapterErrors.NotFound(book, chapter)]);
+        }
+    }
+    
+    public async Task<Result<int>> GetChaptersCountAsync(string translationAbbrev, string book,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var resultChaptersCount =
+                await _chapterRepository.GetChaptersCountAsync(translationAbbrev, book, cancellationToken);
+            return Result<int>.Success(resultChaptersCount);
+        }
+        catch (BookNotFoundException ex)
+        {
+            return Result<int>.Failures([BookErrors.NotFound(book)]);
+        }
+        catch (CouldNotCountChaptersExceptions ex)
+        {
+            return Result<int>.Failures([ChapterErrors.CouldNotCountChapters(translationAbbrev, book)]);
         }
     }
 }

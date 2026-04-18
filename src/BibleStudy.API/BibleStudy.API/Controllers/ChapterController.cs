@@ -28,7 +28,7 @@ public class ChapterController : ControllerBase
         _validator = validator;
     }
     
-    [HttpGet]
+    [HttpGet("chapter")]
     public async Task<ActionResult<ChapterDto>> GetChapterAsync([FromQuery] ChapterRequest request,
         CancellationToken cancellationToken)
     {
@@ -50,6 +50,22 @@ public class ChapterController : ControllerBase
             request.Book,
             request.Chapter,
             cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return await _failureHandler.HandleFailure(result, HttpContext);
+        }
+        
+        return Ok(result.Value);
+    }
+
+    [HttpGet("count")]
+    public async Task<ActionResult<int>> GetChapterCountAsync([FromQuery] CountChapterRequest request,
+        CancellationToken cancellationToken)
+    {
+        // ADD VALIDATION
+        
+        var result = await _chapterService.GetChaptersCountAsync(request.TranslationAbbrev, request.Book, cancellationToken);
 
         if (result.IsFailure)
         {
