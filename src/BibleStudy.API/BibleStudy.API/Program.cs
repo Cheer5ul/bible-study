@@ -52,7 +52,7 @@ builder.Services.AddScoped<IChapterRepository, ChapterRepository>();
 builder.Services.AddScoped<IChapterService, ChapterService>();
 
 builder.Services.AddScoped<ITranslationRepository, TranslationRepository>();
-
+builder.Services.AddScoped<ITranslationService, TranslationService>();
 
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IBookService, BookService>();
