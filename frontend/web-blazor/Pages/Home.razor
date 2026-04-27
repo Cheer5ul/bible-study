@@ -1,7 +1,65 @@
 ﻿@page "/"
+@inject TranslationApiClient TranslationApiClient
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Read The Bible Online</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Select a translation</h1>
 
-Welcome to your new app.
+<form @onsubmit="LoadBookNames" @onsubmit:preventDefault>
+    <label for="translationAbbr">Translation Abbreviation</label>
+    <input id="translationAbbr" @bind="_translationAbbr" type="text" placeholder="ASV"/>
+
+    <button type="submit">Load Books</button>
+</form>
+
+@if (_exception is not null)
+{
+    <p style="color: red">@_exception</p>
+}
+
+@if (_errors is not null)
+{
+    @foreach (var error in _errors)
+    {
+        <p style="color: red">@error.Description</p>
+    }
+}
+
+@if (_bookNames is not null)
+{
+    @foreach (var book in _bookNames)
+    {
+        <p><b>@book</b></p>
+    }
+}
+
+@code
+{
+    private List<string>? _bookNames;
+    private string? _exception;
+    private string? _translationAbbr;
+    private IReadOnlyList<ErrorResponse>? _errors;
+
+    private async Task LoadBookNames()
+    {
+        try
+        {
+            var response = await TranslationApiClient.GetAllBookNamesAsync(_translationAbbr);
+
+            if (response.books == null)
+            {
+                _errors = response.problemDetails?.Errors;
+            }
+            else if (response.problemDetails == null)
+            {
+                _bookNames = response.books;
+                _errors = null;
+                _exception = null;
+            }
+        }
+        catch (Exception exception)
+        {
+            _exception = exception.Message;
+        }
+    }
+}

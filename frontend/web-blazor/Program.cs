@@ -10,5 +10,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddScoped(sp => new HttpClient {BaseAddress = new Uri("http://localhost:5246/") });
 
 builder.Services.AddScoped<ChapterApiClient>();
+builder.Services.AddScoped<TranslationApiClient>();
 
 await builder.Build().RunAsync();

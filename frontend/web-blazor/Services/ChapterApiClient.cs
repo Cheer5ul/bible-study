@@ -17,7 +17,7 @@ public class ChapterApiClient
         int? chapterNumber)
     {
         var response = await _httpClient.GetAsync
-            ($"api/Chapter?TranslationAbbrev={translationAbbr}&Book={bookName}&Chapter={chapterNumber}");
+            ($"http://localhost:5246/api/Chapter/chapter?TranslationAbbrev={translationAbbr}&Book={bookName}&Chapter={chapterNumber}");
 
         if (response.IsSuccessStatusCode)
         {
