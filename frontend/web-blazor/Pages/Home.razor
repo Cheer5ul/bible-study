@@ -5,15 +5,11 @@
 
 <h1>Select a translation</h1>
 
-<form @onsubmit="LoadBookNames" @onsubmit:preventDefault>
-    <label for="translationAbbr">Translation Abbreviation</label>
-    <input id="translationAbbr" @bind="_translationAbbr" type="text" placeholder="ASV"/>
-
-    <button type="submit">Load Books</button>
-</form>
+<input @bind="_translationAbbr" placeholder="ASV"/>
+<button @onclick="LoadBookNames">Load Books</button>
 
 @if (_exception is not null)
-{
+{   
     <p style="color: red">@_exception</p>
 }
 
@@ -29,7 +25,18 @@
 {
     @foreach (var book in _bookNames)
     {
-        <p><b>@book</b></p>
+        <p>
+            <button @onclick="() => LoadAllChapters(_translationAbbr, book)">
+                @book
+            </button>
+        </p>
+        @if (_selectedBook == book && _chaptersOfBook is not null)
+        {
+            @foreach (var chapter in Enumerable.Range(1, _chaptersOfBook.Value))
+            {
+                <button>Chapter @chapter</button>
+            }<p/> 
+        }
     }
 }
 
@@ -39,6 +46,8 @@
     private string? _exception;
     private string? _translationAbbr;
     private IReadOnlyList<ErrorResponse>? _errors;
+    private int? _chaptersOfBook;
+    private string? _selectedBook;
 
     private async Task LoadBookNames()
     {
@@ -46,18 +55,42 @@
         {
             var response = await TranslationApiClient.GetAllBookNamesAsync(_translationAbbr);
 
-            if (response.books == null)
-            {
-                _errors = response.problemDetails?.Errors;
-            }
-            else if (response.problemDetails == null)
+            if (response.books != null)
             {
                 _bookNames = response.books;
                 _errors = null;
                 _exception = null;
             }
+            else
+            {
+                _errors = response.problemDetails?.Errors;
+            }
         }
         catch (Exception exception)
+        {
+            _exception = exception.Message;
+        }
+    }
+
+    private async Task LoadAllChapters(string? translationAbbrev, string? book)
+    {
+        try
+        {
+            var response = await TranslationApiClient.GetChapterCountAsync(translationAbbrev, book);
+
+            if (response.chapters != null)
+            {
+                _selectedBook = book;
+                _chaptersOfBook = response.chapters;
+                _errors = null;
+                _exception = null;
+            }
+            else
+            {
+                _errors = response.problemDetails?.Errors;
+            }
+        }
+        catch(Exception exception)
         {
             _exception = exception.Message;
         }

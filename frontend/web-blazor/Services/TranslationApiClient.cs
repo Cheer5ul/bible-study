@@ -31,4 +31,24 @@ public class TranslationApiClient
             return (null, errorResponse);
         }
     }
+
+    public async Task<(int? chapters, ProblemDetailsResponse? problemDetails)> GetChapterCountAsync(
+        string? translationAbbrev, string? bookName)
+    {
+        var response = await _httpClient.GetAsync(
+            $"http://localhost:5246/api/Chapter/count?TranslationAbbrev={translationAbbrev}&Book={bookName}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var chapters = await response.Content.ReadFromJsonAsync<int>(
+                new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
+            return (chapters, null);
+        }
+        else
+        {
+            var errorResponse = await response.Content.ReadFromJsonAsync<ProblemDetailsResponse>(
+                new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
+            return (null, errorResponse);
+        }
+    }
 }
