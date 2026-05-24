@@ -34,8 +34,17 @@
         {
             @foreach (var chapter in Enumerable.Range(1, _chaptersOfBook.Value))
             {
-                <button>Chapter @chapter</button>
-            }<p/> 
+                <button @onclick="() => LoadChapterContentsAsync(_translationAbbr, book, chapter)">
+                    Chapter @chapter
+                </button>
+                @if (_selectedBook == book && _chaptersOfBook is not null)
+                {
+                    @foreach (var verse in _verses)
+                    {
+                        <p>@verse.VerseNumber : @verse.Text</p>
+                    }
+                }
+            } 
         }
     }
 }
@@ -48,6 +57,8 @@
     private IReadOnlyList<ErrorResponse>? _errors;
     private int? _chaptersOfBook;
     private string? _selectedBook;
+    private int? _selectedChapter;
+    private IReadOnlyList<VerseLineDto?>? _verses;
 
     private async Task LoadBookNames()
     {
@@ -91,6 +102,32 @@
             }
         }
         catch(Exception exception)
+        {
+            _exception = exception.Message;
+        }
+    }
+
+    private async Task LoadChapterContentsAsync(string? translationAbbrev, string? book, int? chapter)
+    {
+        try
+        {
+            var response = await TranslationApiClient.GetChapterContentsAsync(
+                translationAbbrev, book, chapter);
+
+            if (response.chapter != null)
+            {
+                _selectedBook = book;
+                _selectedChapter = chapter;
+                _verses = response.chapter.Verses;
+                _errors = null;
+                _exception = null;
+            }
+            else
+            {
+                _errors = response.problemDetails?.Errors;
+            }
+        }
+        catch (Exception exception)
         {
             _exception = exception.Message;
         }
